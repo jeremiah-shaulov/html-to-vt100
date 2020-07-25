@@ -1,6 +1,6 @@
 {	"name": "jeremiah-shaulov/html-to-vt100",
-	"description": "CSS selectors query language for DOMDocument, with XPath axes extension",
-	"keywords": ["css","dom","xpath"],
+	"description": "Convert HTML to VT100 terminal codes, to print colored and styled messages",
+	"keywords": ["terminal","html"],
 	"homepage": "https://github.com/jeremiah-shaulov/html-to-vt100",
 	"authors":
 	[	{	"name": "Jeremiah Shaulov",
