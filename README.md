@@ -1,12 +1,21 @@
 # html-to-vt100
+
 Convert HTML to VT100 terminal codes, to print colored and styled messages.
+
+## Installation
+
+Create a directory for your application, `cd` to it, and issue:
+
+```bash
+composer require jeremiah-shaulov/html-to-vt100
+```
 
 ## Example
 
 ```php
 <?php
 
-require 'Vt100.php';
+require_once 'vendor/autoload.php';
 use Vt100;
 
 // to output
@@ -14,6 +23,12 @@ echo Vt100::from_html('aaa<b style="color:magenta">BBB</b>ccc');
 
 // to error log
 error_log(Vt100::from_html('aaa<b style="color:magenta">BBB</b>ccc'));
+```
+
+CLI applications can echo messages to terminal. Web applications can write them to error log, or to a custom log file, and then view it with
+
+```bash
+less -r filename.log
 ```
 
 ## What supported
