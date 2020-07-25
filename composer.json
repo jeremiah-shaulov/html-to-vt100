@@ -1,0 +1,17 @@
+{	"name": "jeremiah-shaulov/html-to-vt100",
+	"description": "CSS selectors query language for DOMDocument, with XPath axes extension",
+	"keywords": ["css","dom","xpath"],
+	"homepage": "https://github.com/jeremiah-shaulov/html-to-vt100",
+	"authors":
+	[	{	"name": "Jeremiah Shaulov",
+			"email": "jeremiah-shaulov@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"require":
+	{	"php": "^5.6"
+	},
+	"autoload":
+	{	"files": ["Vt100.php"]
+	}
+}
