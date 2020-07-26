@@ -2,6 +2,7 @@
 	"description": "Convert HTML to VT100 terminal codes, to print colored and styled messages",
 	"keywords": ["terminal","html"],
 	"homepage": "https://github.com/jeremiah-shaulov/html-to-vt100",
+	"license": "MIT",
 	"authors":
 	[	{	"name": "Jeremiah Shaulov",
 			"email": "jeremiah-shaulov@gmail.com",
