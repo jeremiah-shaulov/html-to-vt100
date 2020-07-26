@@ -201,20 +201,25 @@ class Vt100
 				}
 				$mode = $stack_len==0 ? [] : $mode_stack[$stack_len-1];
 				if (!$is_close_tag)
-				{	if ($tag_name=='b' or $tag_name=='strong')
-					{	$mode[1] = true; // bold
-					}
-					else if ($tag_name == 'i')
-					{	$mode[3] = true; // italic
-					}
-					else if ($tag_name == 'u')
-					{	$mode[4] = true; // underline
-					}
-					else if ($tag_name == 'blink')
-					{	$mode[5] = true; // blink
-					}
-					else if ($tag_name == 'em')
-					{	$mode[7] = true; // inverse
+				{	switch ($tag_name)
+					{	case 'b':
+						case 'strong':
+							$mode[1] = true; // bold
+							break;
+						case 'i':
+							$mode[3] = true; // italic
+							break;
+						case 'u':
+							$mode[4] = true; // underline
+							break;
+						case 'blink':
+							$mode[5] = true; // blink
+							break;
+						case 'em':
+							$mode[7] = true; // inverse
+							break;
+						case 'br':
+							return "\n";
 					}
 					$attrs = preg_replace_callback
 					(	'~\s+(?:([a-z]+)\s*=\s*)?([^\s"\']+|"[^"]*"|\'[^\']*\')+~i',
@@ -302,12 +307,15 @@ class Vt100
 	public static function to_html($str)
 	{	$close_tags = '';
 		$str = preg_replace_callback
-		(	'~<|&|>|\033\[(\d+)(?:;2;(\d+);(\d+);(\d+))?m~',
+		(	'~\r?\n|\r|<|&|>|\033\[(\d+)(?:;2;(\d+);(\d+);(\d+))?m~',
 			function($m) use(&$close_tags)
 			{	switch ($m[0])
 				{	case '<': return '&lt;';
 					case '&': return '&amp;';
 					case '>': return '&gt;';
+					case "\n":
+					case "\r\n":
+					case "\r": return "<br>";
 				}
 				$code = $m[1];
 				switch ($code)

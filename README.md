@@ -16,13 +16,13 @@ composer require jeremiah-shaulov/html-to-vt100
 <?php
 
 require_once 'vendor/autoload.php';
-use Vt100;
+use Vt100\Vt100;
 
 // to output
-echo Vt100::from_html('aaa<b style="color:magenta">BBB</b>ccc');
+echo Vt100::from_html('aaa<b style="color:magenta">BBB</b>ccc<br>');
 
 // to error log
-error_log(Vt100::from_html('aaa<b style="color:magenta">BBB</b>ccc'));
+error_log(Vt100::from_html('aaa<b style="color:magenta">BBB</b>ccc<br>'));
 ```
 
 CLI applications can echo messages to terminal. Web applications can write them to error log, or to a custom log file, and then view it with
@@ -31,10 +31,30 @@ CLI applications can echo messages to terminal. Web applications can write them 
 less -r filename.log
 ```
 
+The written file can be then converted to HTML and presented in browser:
+
+```php
+<?php
+
+require_once 'vendor/autoload.php';
+use Vt100\Vt100;
+
+$FILENAME = '/tmp/myapp.log';
+
+// 1. Write some messages to file
+file_put_contents($FILENAME, Vt100::from_html("<b>IMPORTANT</b> message<br>"));
+file_put_contents($FILENAME, Vt100::from_html("<i style='color:blue'>Notice</i> message<br>"), FILE_APPEND);
+file_put_contents($FILENAME, Vt100::from_html("<b style='color:yellow; background-color:black'>Warning</b> message<br>"), FILE_APPEND);
+
+// 2. Read and present to browser
+echo Vt100::to_html(file_get_contents($FILENAME));
+```
+
 ## What supported
 
 Limited subset of HTML is supported:
 
+- `<br>`
 - `<b>bold</b>`
 - `<i>italic</i>`
 - `<u>underlined</u>`
